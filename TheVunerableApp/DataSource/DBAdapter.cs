@@ -34,9 +34,7 @@ namespace TheVunerableApp.DataSource
                     if (connection.State == System.Data.ConnectionState.Open)
                     {
                         Console.WriteLine("Connected to MySQL server!");
-
                         // We arent using the Remote DB here; however, this is a valid code in the App
-
                         connection.Close();
                     }
                     else

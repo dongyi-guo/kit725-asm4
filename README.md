@@ -8,8 +8,7 @@
 
 ## Important Guideline
 
-* All newly generated code must be written
-within the provided code files.
+* All newly generated code must be written within the provided code files.
 * Additional classes must not be added to the source code.
 * The names of the classes and methods/functions must not change.
 * New code/updated code must be written within functions inside a class.
@@ -48,6 +47,54 @@ public string TestCodeWithVulnerabilities(int someVar)
 
 ## Writing Exploit Code
 
-All exploit code (as a client) must be added in the Test.cs Class and called from Program.cs
+All exploit code (as a client) must be added in the **Test.cs** Class and called from **Program.cs**
 
-Each exploit must be coded in a separate method/function. The name of the method/function must include a CWE reference and the student name who implemented the exploit. For example, CWE-190 exploited by John Doe, should be implemented as a function named CWE190_JohnDoe.
+* **After the function implemented in Test.cs, call it in Program.cs.**
+
+Each exploit must be coded in a separate method/function. The name of the method/function must include a CWE reference and the student name who implemented the exploit. For example, CWE-190 exploited by Don Yi, should be implemented as a function named CWE190_DonYi.
+
+## CWE Listings - Top 25
+
+* 787: Out of Bounds Write
+* 125: Out of Bounds Read
+* 190: Integer Overflow or Wraparound
+* 22: Improper Limitation of a Pathname to a Restricted Directory
+* 77: Improper Neutralization of Special Elements used in commands ("Command injection")
+* 78: Improper Neutralization of Special Elements used in OS commands ("OS command injection")
+* 79: Improper Neutralization of Input During Web Page Generation ("XSS")
+* 89: Improper Neutralization of Special Elements used in an SQL Command ("SQL Injection")
+* 94: Improper Control of Generation of Code ("Code Injection")
+* 119: Improper Restriction of Operations within the Bounds of a Memory Buffer
+* 169: Improper Privilege Management
+* 276: Incorrect Default Permissions
+* 287: Improper Authentication
+* 863: Incorrect Authorization
+* 798: Hard-coded Credentials
+* 862: Missing Authorization
+* 306: Missing Critical Function's Authorization
+* 352: Cross-Site Request Forgery (CSRF)
+* 918: Server-Side Request Forgery (SSRF)
+* 416: Use After Free
+* 434: Unrestricted Upload of File Type with Danger
+* 476: Null Pointer Dereference 
+* 502: Deserialization of Untrusted Data
+* 362: Concurrent Execution using Shared Resource with Improper Synchronization ("Race Condition")
+
+## CWE Listings - On the cusp
+
+* 617: Reachable Assertion
+* 427: Uncontrolled Search Path Element
+* 611: Improper Restriction of XML External Entity Reference
+* 770:  Allocation of Resources Without Limits of Throttling
+* 200: Exposure of Sensitive Information to an Unauthorized Actor
+* 732: Incorrect Permission Assignment for Critical Resource
+* 601: URL Redirection to Untrusted Site ("Open Redirect")
+* 1321: Improperly Controlled Modification of Object Prototype Attributes ("Prototype Pollution")
+* 295: Improper Certificate Validation
+* 522: Insufficiently Protected Credentials
+* 401: Missing Release of Memory aftertion Effective Lifetime
+* 400: Uncontrolled Resource Consumption
+* 639: Authorization Bypass Though User-Controlled Key
+* 59: Improper Link Resolution Before File Access ("Link Following")
+* 668: Exposure of Resource to Wrong Sphere
+

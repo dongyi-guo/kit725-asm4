@@ -38,7 +38,6 @@ namespace TheVunerableApp.Controller
         public static void LoadTransaction(string path)
         {
             LocalStore store = new LocalStore();
-
         }
     }
 }
