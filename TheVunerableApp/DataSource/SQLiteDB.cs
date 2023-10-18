@@ -32,6 +32,7 @@ namespace TheVunerableApp.DataSource
             return false;
         }
 
+        
         public double GetBalance(string accountNumber)
         {
             double balance = 0;
@@ -53,13 +54,30 @@ namespace TheVunerableApp.DataSource
                 }
                 conn.Close();
             }
-
             return balance;
         }
+
+        /*
+         * One vulnerability identified in this method
+         * 
+         * 1.
+         * Identified as CWE-476
+         * 18/10/2023 - Identified by Dongyi Guo
+         * 18/10/2023 - Exploited by Dongyi Guo
+         * 18/10/2023 - Patched by Dongyi Guo
+         */
         public Customer GetCustomerDetailsFromDB(string customerId)
         {
             string customerQuery = "SELECT Name, SirName, Email, GovId FROM User WHERE UserId = @userId";
-            Customer customer = null;
+
+            // If customer object not fetched from database, default customer value null will be returned.
+            // Code with vulnerability
+            // Customer customer = null;
+
+            // Weakness Resolved
+            Customer customer = new Customer("", "", "", "", "");
+
+            // This exploit can also be fixed in upper level class (UserController.cs) or where it is being called.
 
             using (SQLiteConnection conn = new SQLiteConnection(ConnectionString))
             {
@@ -79,9 +97,7 @@ namespace TheVunerableApp.DataSource
                 }
                 conn.Close();
             }
-
             return customer;
-
         }
 
         public List<string> GetCustomerIdFromDB(string accountNo)
@@ -121,7 +137,6 @@ namespace TheVunerableApp.DataSource
                 using (SQLiteCommand cmd = new SQLiteCommand(customerQuery, conn))
                 {
                     cmd.Parameters.AddWithValue("@customerId", customerId);
-
                     using (SQLiteDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
@@ -132,7 +147,6 @@ namespace TheVunerableApp.DataSource
                 }
                 conn.Close();
             }
-
             return accounts;
         }
 
@@ -167,7 +181,6 @@ namespace TheVunerableApp.DataSource
                 }
                 conn.Close();
             }
-
             return true;
         }
 

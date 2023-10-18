@@ -29,6 +29,10 @@ namespace TheVunerableApp
         static void Main(string[] args)
         {
             Console.WriteLine("Start");
+            Test.Test.ExploitBounds();
+            Test.Test.CWE476_DongyiGuo();
+            Test.Test.CWE89_DongyiGuo();
+
            // Program.DbSetUpForTesting(); // For setup only Do not use it unless the db is in inconsistence state.
 
 
@@ -62,9 +66,10 @@ namespace TheVunerableApp
         {
             UserController.UpdateUser("6763996216", "Jean", "Grey", "j.grey@xmen.com", "321-456-9876");
         }
+
         private static void DisplayUserDetails() 
         {
-            Customer customer = UserController.DisplayUserDetails("SB19-87204084A");  
+            Customer customer = UserController.DisplayUserDetails("SB19-87204084A");
             Console.WriteLine(customer);
         }
         private static void AddCustomerToAccount() 

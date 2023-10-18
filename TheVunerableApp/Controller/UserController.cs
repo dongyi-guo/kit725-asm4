@@ -33,6 +33,22 @@ namespace TheVunerableApp.Controller
             sql.CreateUserInDB(customer, 0);
             return customer.CustomerId;
         }
+
+        /*
+         *  Two Weaknesses identified in this method
+         *  
+         *  1. 
+         *  Identified as CWE-787
+         *  1/9/2023 - Identified by Professor Amin 
+         *  1/9/2023 - Exploited by Professor Amin
+         *  21/9/2023 - Patched and tested by Professor Amin
+         *  
+         *  2. 
+         *  Identified as CWE-125
+         *  1/9/2023 - Identified by Professor Amin
+         *  1/9/2023 - Exploited by Professor Amin
+         *  21/9/2023 - Patched and tested by Professor Amin
+         */
         public static List<string> ListOfAccountBalance(string customerId)
         {
             // get the number of account
@@ -40,10 +56,20 @@ namespace TheVunerableApp.Controller
             List<string> accountNumbers = db.GetAllAccountsFromDB(customerId);
             List<string> balances = new List<string>();
 
+            //Code with Vulnerabilities.
+            /*
             for (int i = 0; i<=accountNumbers.Count; i++)
             {
                 balances[i] = accountNumbers[i] +"-"+ db.GetBalance(accountNumbers[i]);
             }
+            */
+
+            //Weakness resolved - fixed code
+            for (int i = 0; i < accountNumbers.Count; i++)
+            {
+                balances.Add(accountNumbers[i] + "-" + db.GetBalance(accountNumbers[i]));
+            }
+
             return balances;
         }
         public static void UpdateUser(string customerId, string name, string sName, string email, string govId)
@@ -52,23 +78,55 @@ namespace TheVunerableApp.Controller
             sql.UpdateCustomerDetailsInDB(customerId, name, sName, email, govId);
         }
 
+
+        /*
+         * One vulnerability identified in this method
+         * 
+         * 1.
+         * Identified as CWE-476
+         * 18/10/2023 - Identified by Dongyi Guo
+         * 18/10/2023 - Exploited by Dongyi Guo
+         * 18/10/2023 - Patched by Dongyi Guo
+         */
         public static Customer DisplayUserDetails(string customerId)
         {
             SQLiteDB sql = new SQLiteDB();
-            return sql.GetCustomerDetailsFromDB(customerId);
+
+            // Code with Vulnerability
+            // If the customer id is incorrect, null will be returned.
+            // return sql.GetCustomerDetailsFromDB(customerId);
+            
+            // Weakness Patched
+            Customer customer = sql.GetCustomerDetailsFromDB(customerId);
+            if (null != customer)
+            {
+                return customer;
+            }
+            else
+            {
+                return new Customer("", "", "", "", "");
+            }
+
+            // This exploit can also be fixed in lower level class (SQLiteDB.cs) or where it is being called.
         }
+
         public static string RemoveCustomer(string customerId)
         {
             SQLiteDB sql = new SQLiteDB();
             Customer customer = sql.RemoveUser(customerId);
-            return customer.CustomerId; // return the customer id of the user removed from the database
+            // Return the customer id of the user removed from the database
+            return customer.CustomerId; 
         }
+
+        
         public static List<Customer> SearchCustomerByAccountNumber(string  accountNumber)
         {
             SQLiteDB sql = new SQLiteDB();
             List<Customer> customerList = new List<Customer>();
 
             List<string> customerIds = sql.GetCustomerIdFromDB(accountNumber);
+
+
             for (int i = 0; i <= customerIds.Count; i++)
             {
                 customerList.Add(sql.GetCustomerDetailsFromDB(customerIds[i]));

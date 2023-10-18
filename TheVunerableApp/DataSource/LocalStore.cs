@@ -23,7 +23,7 @@ namespace TheVunerableApp.DataSource
         {
             FilePath = AppDomain.CurrentDomain.BaseDirectory + ConfigurationManager.AppSettings["TRPath"];
         }
-    
+
         public string FilePath { get; }
 
         public bool StoreTransactions(Transaction transaction)

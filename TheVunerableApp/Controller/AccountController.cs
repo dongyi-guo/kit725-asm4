@@ -58,6 +58,5 @@ namespace TheVunerableApp.Controller
             SQLiteDB dB = new SQLiteDB();
             return dB.GetBalance(accountNumber);
         }
-
     }
 }

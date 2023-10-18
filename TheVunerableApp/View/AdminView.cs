@@ -55,6 +55,4 @@ namespace TheVunerableApp.View
             Console.WriteLine("User created successfully with id:{0}", userId);
         } 
     }
-
-
 }
