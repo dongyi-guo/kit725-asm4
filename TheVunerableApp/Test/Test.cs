@@ -15,6 +15,7 @@ using TheVunerableApp.Controller;
 using TheVunerableApp.DataSource;
 using TheVunerableApp;
 using TheVunerableApp.Model;
+using System.Data.SQLite;
 
 namespace TheVunerableApp.Test
 {
@@ -57,11 +58,11 @@ namespace TheVunerableApp.Test
                 Console.WriteLine(customer_uc.ToString());
 
                 //After the patch, no exception will be thrown.
-                Console.WriteLine("Exploit Patched");
+                Console.WriteLine("CWE-476 Patched");
             }
             catch
             {
-                Console.WriteLine("Exception found, Exploit Successfully");
+                Console.WriteLine("CWE-476 Exploited");
             }
 
             // This exploit has sample patches in SQLiteDB.cs and UserController.cs, but it can also be fixed while being called: 
@@ -108,12 +109,25 @@ namespace TheVunerableApp.Test
         }
 
         /*
+         * The following function exploits and tests CWE-427 for:
          * 
+         * SQLiteDB.cs - GetCustomerDetailsFromDB(customerId)
+         * OR
+         * UseController.cs - DisplayUserDetails(customerId)
          */
-        public static void CWE89_DongyiGuo()
+        public static void CWE427_RonghuaYang()
         {
+            // DB\Bank.sqlite created
             SQLiteDB db_tmp = new SQLiteDB();
-            db_tmp.GetBalance("46101163; INSERT INTO User (UserID, Name, SirName, Email, GovId) VALUES ('6969696969', 'Dongyi', 'Guo', 'SQL@Injected.com', '6969696969');");
+            try
+            {
+                SQLiteConnection sql_conn = new SQLiteConnection("Data Source=" + db_tmp.Filepath);
+                Console.WriteLine("CWE-427 Patched");
+            }
+            catch
+            {
+                Console.WriteLine("CWE-427 Exploited");
+            }
         }
 
 

@@ -20,7 +20,24 @@ namespace TheVunerableApp.DataSource
     internal class SQLiteDB:DBAdapter
     {
         public string ConnectionString = "Data Source=VulApp.db";
-        public string Filepath = @"C:\Users\mbamin\source\repos\TheVunerableApp\TheVunerableApp\DB\Bank.sqlite";
+
+        /*
+         * One vulnerability identified in this variable
+         * 
+         * 1.
+         * Identified as CWE-427
+         * 18/10/2023 - Identified by Ronghua Yang
+         * 18/10/2023 - Exploited by Ronghua Yang
+         * 18/10/2023 - Patched by Ronghua Yang
+         */
+
+        // Code with vulnerability
+        // This absolute path only works on certain machine as username of current user is part of it.
+        // public string Filepath = @"C:\Users\mbamin\source\repos\TheVunerableApp\TheVunerableApp\DB\Bank.sqlite";
+
+        // Weakness resolved - use relative path
+        public string Filepath = @"DB\Bank.sqlite";
+
         public bool ConnectToDS()
         {
             using (SQLiteConnection conn = new SQLiteConnection(ConnectionString))

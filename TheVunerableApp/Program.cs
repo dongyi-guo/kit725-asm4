@@ -31,7 +31,7 @@ namespace TheVunerableApp
             Console.WriteLine("Start");
             Test.Test.ExploitBounds();
             Test.Test.CWE476_DongyiGuo();
-            Test.Test.CWE89_DongyiGuo();
+            Test.Test.CWE427_RonghuaYang();
 
            // Program.DbSetUpForTesting(); // For setup only Do not use it unless the db is in inconsistence state.
 
