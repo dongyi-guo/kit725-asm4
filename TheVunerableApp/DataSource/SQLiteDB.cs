@@ -6,6 +6,7 @@
 */
 
 using Org.BouncyCastle.Asn1.Ocsp;
+using Org.BouncyCastle.Crypto.Generators;
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
@@ -14,6 +15,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TheVunerableApp.Model;
 using TheVunerableApp.View;
+using System.Security.Cryptography;
 
 namespace TheVunerableApp.DataSource
 {
@@ -94,7 +96,7 @@ namespace TheVunerableApp.DataSource
             // Weakness Resolved
             Customer customer = new Customer("", "", "", "", "");
 
-            // This exploit can also be fixed in upper level class (UserController.cs) or where it is being called.
+            // This exploit can also be fixed in upper level class (UserController.cs).
 
             using (SQLiteConnection conn = new SQLiteConnection(ConnectionString))
             {
@@ -302,6 +304,16 @@ namespace TheVunerableApp.DataSource
             }
             return true;
         }
+
+        /*
+         * One vulnerability identified in this method
+         * 
+         * 1.
+         * Identified as CWE-798
+         * 19/10/2023 - Identified by Thuan Pin Goh
+         * 19/10/2023 - Exploited by Thuan Pin Goh
+         * 19/10/2023 - Patched by Thuan Pin Goh
+         */
         public bool CreateUserInDB(User requestObj, int flag)
         {
             string userQuery = "INSERT INTO User (UserId, Name, SirName, Email, GovId) VALUES (@id, @name, @sName, @email, @govId)";
@@ -327,10 +339,19 @@ namespace TheVunerableApp.DataSource
                         cmd.Parameters.AddWithValue("@govId", request.GovId);
                         rows = cmd.ExecuteNonQuery();
                     }
-
+                    
                     using (SQLiteCommand cmd = new SQLiteCommand(authQuery, conn))
                     {
+                        /*
+                        byte[] salt = new byte[16]; // Generate a random salt for each user
+                        new RNGCryptoServiceProvider().GetBytes(salt);
+
+                        int iterations = 10000; 
+
+                        string hashedPassword = Convert.ToBase64String(new Rfc2898DeriveBytes(request.Password, salt, iterations).GetBytes(32));
+                        */
                         cmd.Parameters.AddWithValue("@id", request.AdminId);
+                        //cmd.Parameters.AddWithValue("@password", hashedPassword);
                         cmd.Parameters.AddWithValue("@password", request.Password);
                         cmd.Parameters.AddWithValue("@role", "Admin");
                         rows = cmd.ExecuteNonQuery();
@@ -371,7 +392,16 @@ namespace TheVunerableApp.DataSource
 
                     using (SQLiteCommand cmd = new SQLiteCommand(authQuery, conn))
                     {
+                        /*
+                        byte[] salt = new byte[16]; // Generate a random salt for each user
+                        new RNGCryptoServiceProvider().GetBytes(salt);
+
+                        int iterations = 10000; 
+
+                        string hashedPassword = Convert.ToBase64String(new Rfc2898DeriveBytes(request.Password, salt, iterations).GetBytes(32));
+                        */
                         cmd.Parameters.AddWithValue("@id", request.CustomerId);
+                        //cmd.Parameters.AddWithValue("@password", hashedPassword);
                         cmd.Parameters.AddWithValue("@password", request.Password);
                         cmd.Parameters.AddWithValue("@role", "none");
                         rows = cmd.ExecuteNonQuery();

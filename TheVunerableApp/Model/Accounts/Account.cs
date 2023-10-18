@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,19 +34,70 @@ namespace TheVunerableApp.Model
         {
             customers.Add(customerId);
         }
-       
+
+        /*
+         * One vulnerability identified in this method
+         * 
+         * 1.
+         * Identified as CWE-306 (potentially CWE-307, CWE-330)
+         * 19/10/2023 - Identified by Thuan Pin Goh
+         * 19/10/2023 - Exploited by Thuan Pin Goh
+         * 19/10/2023 - Patched by Thuan Pin Goh
+         */
         private string GenerateAccountNumber()
         {
             Random random = new Random();
             string accountNumber = "";
-
+            /*
+            do
+            {
+                for (int i = 0; i < maxAccountNumberLength; i++)
+                {
+                   accountNumber += random.Next(10).ToString();
+                }
+           
+             } while (!AccountNumberExists(accountNumber));
+            */
             for (int i = 0; i < maxAccountNumberLength; i++)
             {
                 accountNumber += random.Next(10).ToString();
             }
-
+            
             return accountNumber;
         }
+
+        /*
+         * This function is created to solve the CWE-306 above
+         * To validate if there is any existing account having the same account number
+         */
+        /*
+        public string ConnectionString = "Data Source=VulApp.db";
+        private bool AccountNumberExists(string accountNumber)
+        {
+            string accountQuery = "SELECT COUNT(*) FROM Account WHERE AccountNumber = @AccountNumber";
+            using (SQLiteConnection conn = new SQLiteConnection(ConnectionString))
+            {
+                conn.Open();
+                using (SQLiteCommand command = new SQLiteCommand(accountQuery, conn))
+                {
+                    command.Parameters.AddWithValue("@AccountNumber", accountNumber);
+                    int count = 0;
+
+                    // If count is 0, the account number is unique; otherwise, it's not
+                    if (count == 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+
+                }
+
+            }
+        }
+        */
 
         public void Deposit(double amount)
         {

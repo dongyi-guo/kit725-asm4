@@ -118,15 +118,23 @@ namespace TheVunerableApp.Controller
             return customer.CustomerId; 
         }
 
-        
-        public static List<Customer> SearchCustomerByAccountNumber(string  accountNumber)
+        /*
+         * One vulnerability identified in this method
+         * 
+         * 1.
+         * Identified as CWE-125
+         * 19/10/2023 - Identified by Thuan Pin Goh
+         * 19/10/2023 - Exploited by Thuan Pin Goh
+         * 19/10/2023 - Patched by Thuan Pin Goh
+         */
+        public static List<Customer> SearchCustomerByAccountNumber(string accountNumber)
         {
             SQLiteDB sql = new SQLiteDB();
             List<Customer> customerList = new List<Customer>();
 
             List<string> customerIds = sql.GetCustomerIdFromDB(accountNumber);
 
-
+            //for (int i = 0; i < customerIds.Count; i++)
             for (int i = 0; i <= customerIds.Count; i++)
             {
                 customerList.Add(sql.GetCustomerDetailsFromDB(customerIds[i]));
