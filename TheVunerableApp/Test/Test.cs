@@ -22,7 +22,6 @@ namespace TheVunerableApp.Test
     internal class Test
     {
         //Added over here
-
         /*
          * Provided by Professor Amin as sample
          * 
@@ -136,14 +135,14 @@ namespace TheVunerableApp.Test
         public static void CWE798_DongyiGuo()
         {
             DBAdapter dBAdapter = new DBAdapter();
-           /* 
-            * For this exploit, any actors that could have visual contact on
-            * the code could easily obtain the server and database address,
-            * username and password.
-            * 
-            * What's more, the binary file compiled can be decompiled and
-            * analysed, providing actors the credential information.
-            */
+            /* 
+             * For this exploit, any actors that could have visual contact on
+             * the code could easily obtain the server and database address,
+             * username and password.
+             * 
+             * What's more, the binary file compiled can be decompiled and
+             * analysed, providing actors the credential information.
+             */
         }
 
 

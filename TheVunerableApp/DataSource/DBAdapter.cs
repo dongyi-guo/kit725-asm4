@@ -30,8 +30,16 @@ namespace TheVunerableApp.DataSource
         {
             string server = "Nebuchadnezzar";
             string database = "TheBankOfZion";
-            string username = "Morpheus";
-            string password = "iL00k4N30";
+
+            // Code with vulnerability
+            //string username = "Morpheus";
+            //string password = "iL00k4N30";
+
+            // Weakness resolved - fixed code
+            Console.WriteLine("Enter the username: ");
+            string username = Console.ReadLine();
+            Console.WriteLine("Enter the password: ");
+            string password = Console.ReadLine();
 
             string connectionString = $"Server={server};Database={database};Uid={username};Pwd={password};";
             try
