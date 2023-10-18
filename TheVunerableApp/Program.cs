@@ -32,8 +32,9 @@ namespace TheVunerableApp
             Test.Test.ExploitBounds();
             Test.Test.CWE476_DongyiGuo();
             Test.Test.CWE427_RonghuaYang();
+            Test.Test.CWE798_DongyiGuo();
 
-           // Program.DbSetUpForTesting(); // For setup only Do not use it unless the db is in inconsistence state.
+            // Program.DbSetUpForTesting(); // For setup only Do not use it unless the db is in inconsistence state.
 
 
             /* Following are test methods that you can use individually to run some test drivers for the code.
@@ -45,7 +46,7 @@ namespace TheVunerableApp
             // Program.getAllUserAccounts();
             //Program.AddCustomerToAccount();
             //Program.getAccountBalance();
-           // Program.PrintFilePathsFromAppSettings();
+            // Program.PrintFilePathsFromAppSettings();
 
         }
 

@@ -16,16 +16,18 @@ using System.Threading.Tasks;
 namespace TheVunerableApp.DataSource
 {
     internal class DBAdapter
-    { 
+    {
+        /*
+         * One vulnerability found in this method
+         * 
+         * 1.
+         * Identified as CWE-798: Hard-coded Credentials
+         * 17/10/2023 - Identified by Dongyi Guo
+         * 17/10/2023 - Exploited by Dongyi Guo 
+         * 17/10/2023 - Patched and tested by Dongyi Guo
+         */
         static void ConnectToRemoteDB()
         {
-            /*
-             * 1.
-             * Identified as CWE-798: Hard-coded Credentials
-             * 17/10/2023 - Identified by Dongyi Guo
-             * 17/10/2023 - Exploited by Dongyi Guo 
-             * 17/10/2023 - Patched and tested by Dongyi Guo
-            */
             string server = "Nebuchadnezzar";
             string database = "TheBankOfZion";
             string username = "Morpheus";
