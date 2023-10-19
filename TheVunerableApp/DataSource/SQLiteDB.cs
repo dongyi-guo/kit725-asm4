@@ -336,7 +336,6 @@ namespace TheVunerableApp.DataSource
         }
 
         /*
-         * One vulnerability identified in this method
          * Two vulnerabilities identified in this method
          * 
          * 1.
@@ -496,10 +495,8 @@ namespace TheVunerableApp.DataSource
                     }
                 }
             }
-
             // Check SourceAccount exist, if not return false
             if (0 == res.Count) return false;
-            
             // Do the same to TargetAccount
             using (SQLiteConnection conn = new SQLiteConnection(ConnectionString))
             {
@@ -517,10 +514,8 @@ namespace TheVunerableApp.DataSource
                     }
                 }
             }
-
             // Check TargetAccount exist, if not return false
             if (0 == res.Count) return false;
-
             //End of Patch
 
             string tQuery = "INSERT INTO TRecord (Id, Source, Target) VALUES (@id, @sAccountNumber, @tAccountNumber)";

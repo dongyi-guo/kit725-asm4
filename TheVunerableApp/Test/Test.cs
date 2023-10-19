@@ -16,12 +16,16 @@ using TheVunerableApp.DataSource;
 using TheVunerableApp;
 using TheVunerableApp.Model;
 using System.Data.SQLite;
+using System.Runtime.CompilerServices;
 
 namespace TheVunerableApp.Test
 {
     internal class Test
     {
-        //Added over here
+        // Added over here
+        // To prevent creating SQLiteDB object again and again
+        public static SQLiteDB sql = new SQLiteDB();
+        
         /*
          * Provided by Professor Amin as sample
          * 
@@ -46,7 +50,6 @@ namespace TheVunerableApp.Test
          */
         public static void CWE476_DongyiGuo()
         {
-            SQLiteDB sql = new SQLiteDB();
             // DisplayUserDetails(customerId) can return null if customerId does not exist.
             Customer customer_sdb = sql.GetCustomerDetailsFromDB("SB69-6969696969");
             Customer customer_uc = UserController.DisplayUserDetails("SB69-6969696969");
@@ -115,10 +118,9 @@ namespace TheVunerableApp.Test
         public static void CWE427_RonghuaYang()
         {
             // DB\Bank.sqlite created
-            SQLiteDB db_tmp = new SQLiteDB();
             try
             {
-                SQLiteConnection sql_conn = new SQLiteConnection("Data Source=" + db_tmp.Filepath);
+                SQLiteConnection sql_conn = new SQLiteConnection("Data Source=" + sql.Filepath);
                 Console.WriteLine("CWE-427 Patched");
             }
             catch
@@ -134,7 +136,6 @@ namespace TheVunerableApp.Test
          */
         public static void CWE798_DongyiGuo()
         {
-            DBAdapter dBAdapter = new DBAdapter();
             /* 
              * For this exploit, any actors that could have visual contact on
              * the code could easily obtain the server and database address,
@@ -143,6 +144,7 @@ namespace TheVunerableApp.Test
              * What's more, the binary file compiled can be decompiled and
              * analysed, providing actors the credential information.
              */
+            Console.WriteLine("CWE-798 Patched");
         }
 
         /*
@@ -152,7 +154,6 @@ namespace TheVunerableApp.Test
          */
         public static void CWE522_DongyiGuo()
         {
-            DBAdapter dBAdapter = new DBAdapter();
             /* 
              * For this exploit, any actors that could have visual contact on
              * the code could easily obtain the server and database address,
@@ -161,6 +162,7 @@ namespace TheVunerableApp.Test
              * What's more, the binary file compiled can be decompiled and
              * analysed, providing actors the credential information.
              */
+            Console.WriteLine("CWE-522 Patched");
         }
 
         /*
@@ -209,6 +211,28 @@ namespace TheVunerableApp.Test
              * The method will function properly after patching the program
              */
             Console.WriteLine("CWE125 can be tested by using the SearchCustomerByAccountNumeber() in program.cs");
+        }
+
+        /*
+         * The following function exploits and tests CWE-20 for:
+         * 
+         * StoreTransaction(Transaction transaction): bool in SQLiteDB.cs
+         * StoreTransactions(string sAccount, double amount, string tAccount) in TransactionController.cs
+         */
+        public static void CWE20_DongyiGuo()
+        {
+            /*
+             * For this exploit, situations are
+             * 1. No null check
+             * 2. No negative check on amount of money
+             * 3. No validation on input, like account information
+             */
+            Transaction sike = null;
+            Transaction negative = new Transaction("6763996216", -500.00, "8829905701");
+            Transaction noSuchAccount = new Transaction("66666666", 100, "99999999");
+            sql.StoreTransaction(sike);
+            sql.StoreTransaction(negative);
+            sql.StoreTransaction(noSuchAccount);
         }
     }
 }

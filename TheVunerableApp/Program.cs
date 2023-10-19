@@ -37,6 +37,7 @@ namespace TheVunerableApp
             Test.Test.CWE798_ThuanPinGoh();
             Test.Test.CWE125_ThuanPinGoh();
             Test.Test.CWE522_DongyiGuo();
+            Test.Test.CWE20_DongyiGuo();
 
             // Program.DbSetUpForTesting(); // For setup only Do not use it unless the db is in inconsistence state.
 
