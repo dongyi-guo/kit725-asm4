@@ -306,13 +306,15 @@ namespace TheVunerableApp.DataSource
         }
 
         /*
-         * One vulnerability identified in this method
+         * Two vulnerabilities identified in this method
          * 
          * 1.
          * Identified as CWE-798
          * 19/10/2023 - Identified by Thuan Pin Goh
          * 19/10/2023 - Exploited by Thuan Pin Goh
          * 19/10/2023 - Patched by Thuan Pin Goh
+         * 
+         * 
          */
         public bool CreateUserInDB(User requestObj, int flag)
         {
@@ -418,9 +420,72 @@ namespace TheVunerableApp.DataSource
             }
             return true;
         }
-        
+
+        /*
+         *  One vulnerability identified in this method
+         *  
+         *  1. 
+         *  Identified as CWE-20
+         *  18/10/2023 - Identified by Dongyi Guo
+         *  18/10/2023 - Exploited by Dongyi Guo
+         *  18/10/2023 - Patched and tested by Dongyi Guo
+         */
+        // First, there is no null check.
+        // Second, the transaction could have: negative amount of money, or invalid account inputs
         public bool StoreTransaction(Transaction transaction)
-        { 
+        {
+            // Start of Patch
+            // Added null check
+            if (null == transaction) return false;
+
+            // Added transaction sanity check
+            if (transaction.Amount < 0) return false;
+
+            // Check if the account existed in the database before for sourceAccount
+            List<string> res = new List<string>();
+            string vQuery = "SELECT * FROM Account WHERE AccountNumber = @account";
+            using (SQLiteConnection conn = new SQLiteConnection(ConnectionString))
+            {
+                conn.Open();
+                using (SQLiteCommand cmd = new SQLiteCommand(vQuery, conn))
+                {
+                    cmd.Parameters.AddWithValue("@account", transaction.SourceAccount);
+
+                    using (SQLiteDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                             res.Add(reader["AccountNumber"].ToString());
+                        }
+                    }
+                }
+            }
+
+            // Check SourceAccount exist, if not return false
+            if (0 == res.Count) return false;
+            
+            // Do the same to TargetAccount
+            using (SQLiteConnection conn = new SQLiteConnection(ConnectionString))
+            {
+                conn.Open();
+                using (SQLiteCommand cmd = new SQLiteCommand(vQuery, conn))
+                {
+                    cmd.Parameters.AddWithValue("@account", transaction.TargetAccount);
+
+                    using (SQLiteDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            res.Add(reader["AccountNumber"].ToString());
+                        }
+                    }
+                }
+            }
+
+            // Check TargetAccount exist, if not return false
+            if (0 == res.Count) return false;
+
+            //End of Patch
 
             string tQuery = "INSERT INTO TRecord (Id, Source, Target) VALUES (@id, @sAccountNumber, @tAccountNumber)";
 

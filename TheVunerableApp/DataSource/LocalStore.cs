@@ -26,8 +26,21 @@ namespace TheVunerableApp.DataSource
 
         public string FilePath { get; }
 
+        /*
+         *  One vulnerability identified in this method
+         *  
+         *  1. 
+         *  Identified as CWE-20
+         *  18/10/2023 - Identified by Dongyi Guo
+         *  18/10/2023 - Exploited by Dongyi Guo
+         *  18/10/2023 - Patched and tested by Dongyi Guo
+         */
+        // This function doesn't check if the transaction is not a null object.
         public bool StoreTransactions(Transaction transaction)
         {
+            // Added null check
+            if (null == transaction) return false;
+
             string transactionInJson = JsonSerializer.Serialize(transaction);
             string path = transaction.TransactionId + ".json";
             File.WriteAllText(Path.Combine(FilePath,path),transactionInJson);

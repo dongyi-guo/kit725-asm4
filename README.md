@@ -55,10 +55,11 @@ Each exploit must be coded in a separate method/function. The name of the method
 
 ## CWE Listings - Top 25
 
-* [ ] 787: Out of Bounds Write
-* [ ] 125: Out of Bounds Read
+* [x] 787: Out of Bounds Write
+* [x] 125: Out of Bounds Read
 * [ ] 190: Integer Overflow or Wraparound
 * [ ] 22: Improper Limitation of a Pathname to a Restricted Directory
+* [ ] 20: Improper Input Validation
 * [ ] 77: Improper Neutralization of Special Elements used in commands ("Command injection")
 * [ ] 78: Improper Neutralization of Special Elements used in OS commands ("OS command injection")
 * [ ] 79: Improper Neutralization of Input During Web Page Generation ("XSS")
@@ -71,7 +72,7 @@ Each exploit must be coded in a separate method/function. The name of the method
 * [ ] 863: Incorrect Authorization
 * [x] 798: Hard-coded Credentials
 * [ ] 862: Missing Authorization
-* [ ] 306: Missing Critical Function's Authorization
+* [x] 306: Missing Critical Function's Authorization
 * [ ] 352: Cross-Site Request Forgery (CSRF)
 * [ ] 918: Server-Side Request Forgery (SSRF)
 * [ ] 416: Use After Free

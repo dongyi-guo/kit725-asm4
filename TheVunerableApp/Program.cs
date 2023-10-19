@@ -29,7 +29,7 @@ namespace TheVunerableApp
         static void Main(string[] args)
         {
             Console.WriteLine("Start");
-            Test.Test.ExploitBounds();
+            Test.Test.ExploitBounds(); // Professor Amin's Sample CWE-787 & 125
             Test.Test.CWE476_DongyiGuo();
             Test.Test.CWE427_RonghuaYang();
             Test.Test.CWE798_DongyiGuo();
@@ -46,7 +46,7 @@ namespace TheVunerableApp
 
             // Program.UpdateCustomerDetails();
             // Program.DisplayUserDetails();
-            // Program.SearchCustomerByAccountNumeber();
+            Program.SearchCustomerByAccountNumeber();
             // Program.getAllUserAccounts();
             // Program.AddCustomerToAccount();
             // Program.getAccountBalance();
