@@ -145,6 +145,24 @@ namespace TheVunerableApp.Test
              */
         }
 
+        /*
+         * The following function exploits and tests CWE-522 for:
+         * 
+         * DBAdapter.cs - server, database, username, password
+         */
+        public static void CWE522_DongyiGuo()
+        {
+            DBAdapter dBAdapter = new DBAdapter();
+            /* 
+             * For this exploit, any actors that could have visual contact on
+             * the code could easily obtain the server and database address,
+             * username and password.
+             * 
+             * What's more, the binary file compiled can be decompiled and
+             * analysed, providing actors the credential information.
+             */
+        }
+
 
     }
 }

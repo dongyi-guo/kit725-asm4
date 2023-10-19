@@ -18,10 +18,15 @@ namespace TheVunerableApp.DataSource
     internal class DBAdapter
     {
         /*
-         * One vulnerability found in this method
+         * Two vulnerabilities found in this method
          * 
          * 1.
          * Identified as CWE-798: Hard-coded Credentials
+         * 17/10/2023 - Identified by Dongyi Guo
+         * 17/10/2023 - Exploited by Dongyi Guo 
+         * 17/10/2023 - Patched and tested by Dongyi Guo
+         * 2. 
+         * Identified as CWE-522: Insufficiently Protected Credentials
          * 17/10/2023 - Identified by Dongyi Guo
          * 17/10/2023 - Exploited by Dongyi Guo 
          * 17/10/2023 - Patched and tested by Dongyi Guo

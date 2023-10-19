@@ -91,7 +91,7 @@ Each exploit must be coded in a separate method/function. The name of the method
 * [ ] 601: URL Redirection to Untrusted Site ("Open Redirect")
 * [ ] 1321: Improperly Controlled Modification of Object Prototype Attributes ("Prototype Pollution")
 * [ ] 295: Improper Certificate Validation
-* [ ] 522: Insufficiently Protected Credentials
+* [x] 522: Insufficiently Protected Credentials
 * [ ] 401: Missing Release of Memory aftertion Effective Lifetime
 * [ ] 400: Uncontrolled Resource Consumption
 * [ ] 639: Authorization Bypass Though User-Controlled Key

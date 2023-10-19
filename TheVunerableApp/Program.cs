@@ -33,6 +33,7 @@ namespace TheVunerableApp
             Test.Test.CWE476_DongyiGuo();
             Test.Test.CWE427_RonghuaYang();
             Test.Test.CWE798_DongyiGuo();
+            Test.Test.CWE522_DongyiGuo();
 
             // Program.DbSetUpForTesting(); // For setup only Do not use it unless the db is in inconsistence state.
 
