@@ -133,9 +133,10 @@ namespace TheVunerableApp.Controller
             List<Customer> customerList = new List<Customer>();
 
             List<string> customerIds = sql.GetCustomerIdFromDB(accountNumber);
-
-            //for (int i = 0; i < customerIds.Count; i++)
-            for (int i = 0; i <= customerIds.Count; i++)
+            //Code with Vulnerabilities.
+            //for (int i = 0; i <= customerIds.Count; i++)
+            // Weakness Patched
+            for (int i = 0; i < customerIds.Count; i++)
             {
                 customerList.Add(sql.GetCustomerDetailsFromDB(customerIds[i]));
             }

@@ -227,7 +227,7 @@ namespace TheVunerableApp.DataSource
 
             return rows;
         }
-
+        
         public bool CreateAccountInDB(Account accountObj, int flag)
         {
             string accountQuery = "INSERT INTO Account (AccountNumber, AccountType, CustomerId) VALUES (@accountNumber, @accountType, @customerId)";
@@ -306,6 +306,37 @@ namespace TheVunerableApp.DataSource
         }
 
         /*
+         * This method is created to solve the CWE-306, CWE-307
+         * To validate if there is any existing account having the same account number
+         */
+        public bool AccountNumberExists(string accountNumber)
+        {
+            string accountQuery = "SELECT COUNT(*) FROM Account WHERE AccountNumber = @AccountNumber";
+            using (SQLiteConnection conn = new SQLiteConnection(ConnectionString))
+            {
+                conn.Open();
+                using (SQLiteCommand command = new SQLiteCommand(accountQuery, conn))
+                {
+                    command.Parameters.AddWithValue("@AccountNumber", accountNumber);
+                    int count = 0;
+
+                    // If count is 0, the account number is unique; otherwise, it's not
+                    if (count == 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+
+                }
+
+            }
+        }
+
+        /*
+         * One vulnerability identified in this method
          * Two vulnerabilities identified in this method
          * 
          * 1.
@@ -344,17 +375,19 @@ namespace TheVunerableApp.DataSource
                     
                     using (SQLiteCommand cmd = new SQLiteCommand(authQuery, conn))
                     {
-                        /*
+                        
                         byte[] salt = new byte[16]; // Generate a random salt for each user
                         new RNGCryptoServiceProvider().GetBytes(salt);
 
                         int iterations = 10000; 
 
                         string hashedPassword = Convert.ToBase64String(new Rfc2898DeriveBytes(request.Password, salt, iterations).GetBytes(32));
-                        */
+                        
                         cmd.Parameters.AddWithValue("@id", request.AdminId);
-                        //cmd.Parameters.AddWithValue("@password", hashedPassword);
-                        cmd.Parameters.AddWithValue("@password", request.Password);
+                        //Code with Vulnerabilities.
+                        //cmd.Parameters.AddWithValue("@password", request.Password);
+                        // Weakness Patched
+                        cmd.Parameters.AddWithValue("@password", hashedPassword);
                         cmd.Parameters.AddWithValue("@role", "Admin");
                         rows = cmd.ExecuteNonQuery();
                     }
@@ -394,17 +427,20 @@ namespace TheVunerableApp.DataSource
 
                     using (SQLiteCommand cmd = new SQLiteCommand(authQuery, conn))
                     {
-                        /*
+                        
                         byte[] salt = new byte[16]; // Generate a random salt for each user
                         new RNGCryptoServiceProvider().GetBytes(salt);
 
                         int iterations = 10000; 
 
                         string hashedPassword = Convert.ToBase64String(new Rfc2898DeriveBytes(request.Password, salt, iterations).GetBytes(32));
-                        */
+                        
                         cmd.Parameters.AddWithValue("@id", request.CustomerId);
-                        //cmd.Parameters.AddWithValue("@password", hashedPassword);
-                        cmd.Parameters.AddWithValue("@password", request.Password);
+                        //Code with Vulnerabilities.
+                        //cmd.Parameters.AddWithValue("@password", request.Password);
+                        // Weakness Patched
+                        cmd.Parameters.AddWithValue("@password", hashedPassword);
+                        
                         cmd.Parameters.AddWithValue("@role", "none");
                         rows = cmd.ExecuteNonQuery();
                     }

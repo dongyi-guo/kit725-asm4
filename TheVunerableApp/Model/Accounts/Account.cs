@@ -11,6 +11,7 @@ using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TheVunerableApp.DataSource;
 
 namespace TheVunerableApp.Model
 {
@@ -39,16 +40,30 @@ namespace TheVunerableApp.Model
          * One vulnerability identified in this method
          * 
          * 1.
-         * Identified as CWE-306 (potentially CWE-307, CWE-330)
+         * Identified as CWE-306, CWE-307, CWE-330
          * 19/10/2023 - Identified by Thuan Pin Goh
          * 19/10/2023 - Exploited by Thuan Pin Goh
          * 19/10/2023 - Patched by Thuan Pin Goh
          */
         private string GenerateAccountNumber()
         {
-            Random random = new Random();
+            //this code is to replace the original random, to ensure the account number has better randomness
+            //Code with Vulnerabilities.
+            //Random random = new Random(); 
+            // Weakness Patched
+
+            Random random = new Random(Guid.NewGuid().GetHashCode()); 
             string accountNumber = "";
+            
+            //Code with Vulnerabilities.
             /*
+            for (int i = 0; i < maxAccountNumberLength; i++)
+            {
+                accountNumber += random.Next(10).ToString();
+            }
+            */
+            // Weakness Patched
+            SQLiteDB db = new SQLiteDB();
             do
             {
                 for (int i = 0; i < maxAccountNumberLength; i++)
@@ -56,48 +71,10 @@ namespace TheVunerableApp.Model
                    accountNumber += random.Next(10).ToString();
                 }
            
-             } while (!AccountNumberExists(accountNumber));
-            */
-            for (int i = 0; i < maxAccountNumberLength; i++)
-            {
-                accountNumber += random.Next(10).ToString();
-            }
+             } while (!db.AccountNumberExists(accountNumber)); //this function available in SQLiteDB
             
             return accountNumber;
         }
-
-        /*
-         * This function is created to solve the CWE-306 above
-         * To validate if there is any existing account having the same account number
-         */
-        /*
-        public string ConnectionString = "Data Source=VulApp.db";
-        private bool AccountNumberExists(string accountNumber)
-        {
-            string accountQuery = "SELECT COUNT(*) FROM Account WHERE AccountNumber = @AccountNumber";
-            using (SQLiteConnection conn = new SQLiteConnection(ConnectionString))
-            {
-                conn.Open();
-                using (SQLiteCommand command = new SQLiteCommand(accountQuery, conn))
-                {
-                    command.Parameters.AddWithValue("@AccountNumber", accountNumber);
-                    int count = 0;
-
-                    // If count is 0, the account number is unique; otherwise, it's not
-                    if (count == 0)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-
-                }
-
-            }
-        }
-        */
 
         public void Deposit(double amount)
         {
