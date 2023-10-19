@@ -40,15 +40,21 @@ namespace TheVunerableApp.Model
          * One vulnerability identified in this method
          * 
          * 1.
-         * Identified as CWE-306 (potentially CWE-307, CWE-330)
+         * Identified as CWE-306, CWE-307, CWE-330
          * 19/10/2023 - Identified by Thuan Pin Goh
          * 19/10/2023 - Exploited by Thuan Pin Goh
          * 19/10/2023 - Patched by Thuan Pin Goh
          */
         private string GenerateAccountNumber()
         {
-            Random random = new Random();
+            //this code is to replace the original random, to ensure the account number has better randomness
+            //Code with Vulnerabilities.
+            //Random random = new Random(); 
+            // Weakness Patched
+
+            Random random = new Random(Guid.NewGuid().GetHashCode()); 
             string accountNumber = "";
+            
             //Code with Vulnerabilities.
             /*
             for (int i = 0; i < maxAccountNumberLength; i++)

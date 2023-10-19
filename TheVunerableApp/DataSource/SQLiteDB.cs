@@ -306,7 +306,7 @@ namespace TheVunerableApp.DataSource
         }
 
         /*
-         * This method is created to solve the CWE-306
+         * This method is created to solve the CWE-306, CWE-307
          * To validate if there is any existing account having the same account number
          */
         public bool AccountNumberExists(string accountNumber)
