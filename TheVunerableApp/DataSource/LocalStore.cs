@@ -53,18 +53,45 @@ namespace TheVunerableApp.DataSource
         }
 
         /*
-         *  One vulnerability identified in this method
+         *  Three vulnerabilities identified in this method
          *  
          *  1. 
+         *  Identified as CWE-22
+         *  18/10/2023 - Identified by Dongyi Guo
+         *  18/10/2023 - Exploited by Dongyi Guo
+         *  18/10/2023 - Patched and tested by Dongyi Guo
+         *  2. 
+         *  Identified as CWE-73
+         *  18/10/2023 - Identified by Dongyi Guo
+         *  18/10/2023 - Exploited by Dongyi Guo
+         *  18/10/2023 - Patched and tested by Dongyi Guo
+         *  3. 
          *  Identified as CWE-502
          *  18/10/2023 - Identified by Dongyi Guo
          *  18/10/2023 - Exploited by Dongyi Guo
          *  18/10/2023 - Patched and tested by Dongyi Guo
          */
-        // This function 
+        // This function reflects on three major vulnerabilites related to file path issues.
         public Transaction LoadTransaction(string path)
         {
-           return JsonSerializer.Deserialize<Transaction>(path);
+            // CWE-22 & 73: Without any limitation on the file path, user can pass
+            // files whereever on the system, even some places the user does not
+            // even have access to but this program has.
+            //
+            // To fix this, use Filepath declared before to limit the upper level
+            // of the path, and reject path if "Up one directory level" is in it.
+            //
+            // Hence @param string path now only takes relative path under root
+            // of Filepath location.
+            if (path.Contains(".."))
+            {
+                throw new ArgumentException("No visit upper layer folder");
+            }
+            path = Path.Combine(FilePath, path);
+
+            // CWE-502: The json file is provided freely from the user, the sanity of it should be checked, JsonSerializer.Deserialize<>() provides Exceptions to be thrown while there are something wrong. While calling this function exception handler should always be kept in mind.
+
+            return JsonSerializer.Deserialize<Transaction>(path);
         }
     }
 }

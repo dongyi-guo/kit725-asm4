@@ -43,13 +43,17 @@ namespace TheVunerableApp
             Program.SearchCustomerByAccountNumeber();
             Test.Test.CWE522_DongyiGuo();
             Test.Test.CWE20_DongyiGuo();
+            Test.Test.CWE22_DongyiGuo();
+            Test.Test.CWE73_DongyiGuo();
+            Test.Test.CWE502_DongyiGuo();
+            Console.WriteLine("Finish");
 
             // Program.DbSetUpForTesting(); // For setup only Do not use it unless the db is in inconsistence state.
 
             /* Following are test methods that you can use individually to run some test drivers for the code.
              * However, you should be writing your test code in Test.cs */
 
-            
+
             // Program.DisplayUserDetails();
             // Program.getAllUserAccounts();
             // Program.AddCustomerToAccount();

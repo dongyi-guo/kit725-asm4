@@ -58,12 +58,13 @@ Each exploit must be coded in a separate method/function. The name of the method
 * [x] 787: Out of Bounds Write
 * [x] 125: Out of Bounds Read
 * [ ] 190: Integer Overflow or Wraparound
-* [x] 22: Improper Limitation of a Pathname to a Restricted Directory
 * [x] 20: Improper Input Validation
+* [x] 22: Improper Limitation of a Pathname to a Restricted Directory
+* [x] 73: External Control of File Name or Path
 * [ ] 77: Improper Neutralization of Special Elements used in commands ("Command injection")
 * [ ] 78: Improper Neutralization of Special Elements used in OS commands ("OS command injection")
 * [ ] 79: Improper Neutralization of Input During Web Page Generation ("XSS")
-* [ ] 89: Improper Neutralization of Special Elements used in an SQL Command ("SQL Injection")
+* [x] 89: Improper Neutralization of Special Elements used in an SQL Command ("SQL Injection")
 * [ ] 94: Improper Control of Generation of Code ("Code Injection")
 * [ ] 119: Improper Restriction of Operations within the Bounds of a Memory Buffer
 * [ ] 169: Improper Privilege Management
@@ -79,8 +80,8 @@ Each exploit must be coded in a separate method/function. The name of the method
 * [ ] 416: Use After Free
 * [ ] 434: Unrestricted Upload of File Type with Danger
 * [x] 476: Null Pointer Dereference 
-* [ ] 502: Deserialization of Untrusted Data
-* [ ] 362: Concurrent Execution using Shared Resource with Improper Synchronization ("Race Condition")
+* [x] 502: Deserialization of Untrusted Data
+* [x] 362: Concurrent Execution using Shared Resource with Improper Synchronization ("Race Condition")
 
 ## CWE Listings - On the cusp
 

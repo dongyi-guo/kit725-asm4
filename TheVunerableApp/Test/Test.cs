@@ -286,5 +286,84 @@ namespace TheVunerableApp.Test
             Console.WriteLine("If error messages above appear and no exception thrown, CWE-20 Patched");
             Console.WriteLine("If error messages appear wrong or exception thrown, CWE-20 Exploited");
         }
+
+        /*
+         * The following function exploits and tests CWE-22 for:
+         * 
+         * LocalStore.cs – LoadTransaction(string path)
+         */
+        public static void CWE22_DongyiGuo()
+        {
+            // To exploit CWE-22, we can pass a path that request visiting upper layer of the hierarchy:
+            try
+            {
+                localStore.LoadTransaction(@"..\..\..\..\..\..\..\windows\System32");
+                Console.WriteLine("If this succeeded, CWE-22 Exploited");
+            }
+            catch
+            {
+                Console.WriteLine("Exception thrown as patch wanted, CWE-22 Patched");
+            }
+            // Or we can use some absolute path by our own:
+            try
+            {
+                localStore.LoadTransaction(@"C:\windows\System32");
+                Console.WriteLine("If this succeeded, CWE-22 Exploited");
+            }
+            catch
+            {
+                Console.WriteLine("Exception thrown as patch wanted, CWE-22 Patched");
+            }
+
+        }
+
+        /*
+         * The following function exploits and tests CWE-73 for:
+         * 
+         * LocalStore.cs – LoadTransaction(string path)
+         */
+        public static void CWE73_DongyiGuo()
+        {
+            // To exploit CWE-73, we can pass a path that request visiting upper layer of the hierarchy:
+            try
+            {
+                localStore.LoadTransaction(@"..\..\..\..\..\..\..\windows\System32");
+                Console.WriteLine("If this succeeded, CWE-22 Exploited");
+            }
+            catch
+            {
+                Console.WriteLine("Exception thrown as patch wanted, CWE-22 Patched");
+            }
+            // Or we can use some absolute path by our own:
+            try
+            {
+                localStore.LoadTransaction(@"C:\windows\System32");
+                Console.WriteLine("If this succeeded, CWE-22 Exploited");
+            }
+            catch
+            {
+                Console.WriteLine("Exception thrown as patch wanted, CWE-22 Patched");
+            }
+
+        }
+
+        /*
+         * The following function exploits and tests CWE-502 for:
+         * 
+         * LocalStore.cs – LoadTransaction(string path)
+         */
+        public static void CWE502_DongyiGuo()
+        {
+            // To exploit CWE-502, just provide some path that won't work:
+            try 
+            {
+                localStore.LoadTransaction(@"dfidsojifds\adfjaipd\f\daFNA\F\");
+            }
+            catch
+            {
+                Console.WriteLine("The Exception was catched, which is intentionally the patch for CWE-502, CWE-502 patched");
+
+            }
+        }
     }
 }
