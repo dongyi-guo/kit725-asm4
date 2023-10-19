@@ -33,6 +33,9 @@ namespace TheVunerableApp
             Test.Test.CWE476_DongyiGuo();
             Test.Test.CWE427_RonghuaYang();
             Test.Test.CWE798_DongyiGuo();
+            Test.Test.CWE306_ThuanPinGoh();
+            Test.Test.CWE798_ThuanPinGoh();
+            Test.Test.CWE125_ThuanPinGoh();
             Test.Test.CWE522_DongyiGuo();
 
             // Program.DbSetUpForTesting(); // For setup only Do not use it unless the db is in inconsistence state.
@@ -45,8 +48,8 @@ namespace TheVunerableApp
             // Program.DisplayUserDetails();
             // Program.SearchCustomerByAccountNumeber();
             // Program.getAllUserAccounts();
-            //Program.AddCustomerToAccount();
-            //Program.getAccountBalance();
+            // Program.AddCustomerToAccount();
+            // Program.getAccountBalance();
             // Program.PrintFilePathsFromAppSettings();
 
         }

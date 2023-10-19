@@ -163,6 +163,52 @@ namespace TheVunerableApp.Test
              */
         }
 
+        /*
+         * The following function exploits and tests CWE-306 for:
+         * 
+         * Account.cs - GenerateAccountNumber() function
+         */
+        public static void CWE306_ThuanPinGoh()
+        {
+            /*
+             * To exploit the CWE in this function, this function will have to 
+             * flood the database to create an exactly same account number 
+             * 
+             * However, this can be a problem if the RNG generate a similar account number
+             * and causing the data corruption
+             */
+            Console.WriteLine("CWE-306 cannot be tested by using normal method as it involve data corruption");
+            //AccountController.CreateSavingsAccount("12345678", 1.0, 1.0);
+            //AccountController.CloseAccount("12345678", "");
 
+        }
+
+        /*
+         * The following function exploits and tests CWE-798 for:
+         * 
+         * SQLiteDB – CreateUserInDB()
+         */
+        public static void CWE798_ThuanPinGoh()
+        {
+            /*
+             * This exploit can be tested by using the createuser() in program.cs
+             * The patched program will display a hashed + salted passowrd in database
+             */
+            Console.WriteLine("CWE-798 can be tested by using the createuser() in program.cs");
+        }
+
+        /*
+         * The following function exploits and tests CWE-125 for:
+         * 
+         * UserController – SearchCustomerByAccountNumber()
+         */
+        public static void CWE125_ThuanPinGoh()
+        {
+            /*
+             * This exploit can be tested by using the Program.SearchCustomerByAccountNumeber() in program.cs
+             * The method will function properly after patching the program
+             */
+            Console.WriteLine("CWE125 can be tested by using the SearchCustomerByAccountNumeber() in program.cs");
+        }
     }
 }
