@@ -7,16 +7,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SQLite;
+using System.Transactions;
 using TheVunerableApp.Controller;
 using TheVunerableApp.DataSource;
-using TheVunerableApp;
 using TheVunerableApp.Model;
-using System.Data.SQLite;
-using System.Runtime.CompilerServices;
+using Transaction = TheVunerableApp.Model.Transaction;
 
 namespace TheVunerableApp.Test
 {
@@ -25,6 +21,7 @@ namespace TheVunerableApp.Test
         // Added over here
         // To prevent creating SQLiteDB object again and again
         public static SQLiteDB sql = new SQLiteDB();
+        public static LocalStore localStore = new LocalStore();
         
         /*
          * Provided by Professor Amin as sample
@@ -47,6 +44,7 @@ namespace TheVunerableApp.Test
          * SQLiteDB.cs - GetCustomerDetailsFromDB(customerId)
          * OR
          * UseController.cs - DisplayUserDetails(customerId)
+         * StoreTransactions(Transaction transaction): bool in LocalStore.cs
          */
         public static void CWE476_DongyiGuo()
         {
@@ -108,6 +106,14 @@ namespace TheVunerableApp.Test
             {
                 Console.WriteLine("customer_uc does not exist");
             }
+
+            // For StoreTransactions(Transaction transaction): bool in LocalStore.cs
+            // If this function takes null object as "transaction", it will be
+            // deserializing and dereferencing an null object
+            Model.Transaction sike = null;
+            localStore.StoreTransactions(sike);
+            Console.WriteLine("If no exception thrown, CWE-476 for StoreTransactions(Transaction transaction): bool in LocalStore.cs was Patched.");
+
         }
 
         /*
@@ -217,7 +223,8 @@ namespace TheVunerableApp.Test
          * The following function exploits and tests CWE-20 for:
          * 
          * StoreTransaction(Transaction transaction): bool in SQLiteDB.cs
-         * StoreTransactions(string sAccount, double amount, string tAccount) in TransactionController.cs
+         * StoreTransactions(Transaction transaction): bool in LocalStore.cs
+         * StoreTransactions(string sAccount, double amount, string tAccount): string in TransactionController.cs
          */
         public static void CWE20_DongyiGuo()
         {
@@ -227,22 +234,25 @@ namespace TheVunerableApp.Test
              * 2. No negative check on amount of money
              * 3. No validation on input, like account information
              */
-            Transaction sike = null;
-            Transaction negative = new Transaction("6763996216", -500.00, "8829905701");
-            Transaction noSuchAccount = new Transaction("66666666", 100, "99999999");
+            Model.Transaction sike = null;
+            Model.Transaction negative = new Model.Transaction("6763996216", -500.00, "8829905701");
+            Model.Transaction noSuchAccount = new Model.Transaction("66666666", 100, "99999999");
             bool sikeCheck = sql.StoreTransaction(sike);
+            bool localStoreSikeCheck = localStore.StoreTransactions(sike);
             bool negativeCheck = sql.StoreTransaction(negative);
             bool noAccountCheck = sql.StoreTransaction(noSuchAccount);
             string invalid_amount = TransactionController.StoreTransactions(negative.SourceAccount, negative.Amount, negative.TargetAccount);
             string invalid_account = TransactionController.StoreTransactions(noSuchAccount.SourceAccount, noSuchAccount.Amount, noSuchAccount.TargetAccount);
 
-            Console.WriteLine("Three boolean below should be all false:");
+            Console.WriteLine("The boolean below should be all false:");
             Console.WriteLine(sikeCheck);
+            Console.WriteLine(localStoreSikeCheck);
             Console.WriteLine(negativeCheck);
             Console.WriteLine(noAccountCheck);
             Console.WriteLine(invalid_amount);
             Console.WriteLine(invalid_account);
             Console.WriteLine("If error messages above appear and no exception thrown, CWE-20 Patched");
+            Console.WriteLine("If error messages appear wrong or exception thrown, CWE-20 Exploited");
         }
     }
 }

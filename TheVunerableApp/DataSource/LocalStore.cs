@@ -27,10 +27,15 @@ namespace TheVunerableApp.DataSource
         public string FilePath { get; }
 
         /*
-         *  One vulnerability identified in this method
+         *  Two vulnerabilities identified in this method
          *  
          *  1. 
          *  Identified as CWE-20
+         *  18/10/2023 - Identified by Dongyi Guo
+         *  18/10/2023 - Exploited by Dongyi Guo
+         *  18/10/2023 - Patched and tested by Dongyi Guo
+         *  2.
+         *  Identified as CWE-476
          *  18/10/2023 - Identified by Dongyi Guo
          *  18/10/2023 - Exploited by Dongyi Guo
          *  18/10/2023 - Patched and tested by Dongyi Guo
@@ -47,6 +52,16 @@ namespace TheVunerableApp.DataSource
             return true;
         }
 
+        /*
+         *  One vulnerability identified in this method
+         *  
+         *  1. 
+         *  Identified as CWE-502
+         *  18/10/2023 - Identified by Dongyi Guo
+         *  18/10/2023 - Exploited by Dongyi Guo
+         *  18/10/2023 - Patched and tested by Dongyi Guo
+         */
+        // This function 
         public Transaction LoadTransaction(string path)
         {
            return JsonSerializer.Deserialize<Transaction>(path);

@@ -43,7 +43,6 @@ namespace TheVunerableApp
 
             // Program.DbSetUpForTesting(); // For setup only Do not use it unless the db is in inconsistence state.
 
-
             /* Following are test methods that you can use individually to run some test drivers for the code.
              * However, you should be writing your test code in Test.cs */
 

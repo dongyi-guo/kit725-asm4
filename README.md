@@ -58,8 +58,8 @@ Each exploit must be coded in a separate method/function. The name of the method
 * [x] 787: Out of Bounds Write
 * [x] 125: Out of Bounds Read
 * [ ] 190: Integer Overflow or Wraparound
-* [ ] 22: Improper Limitation of a Pathname to a Restricted Directory
-* [ ] 20: Improper Input Validation
+* [x] 22: Improper Limitation of a Pathname to a Restricted Directory
+* [x] 20: Improper Input Validation
 * [ ] 77: Improper Neutralization of Special Elements used in commands ("Command injection")
 * [ ] 78: Improper Neutralization of Special Elements used in OS commands ("OS command injection")
 * [ ] 79: Improper Neutralization of Input During Web Page Generation ("XSS")
@@ -73,6 +73,7 @@ Each exploit must be coded in a separate method/function. The name of the method
 * [x] 798: Hard-coded Credentials
 * [ ] 862: Missing Authorization
 * [x] 306: Missing Critical Function's Authorization
+* [x] 330: Use of Insufficiently Random Values
 * [ ] 352: Cross-Site Request Forgery (CSRF)
 * [ ] 918: Server-Side Request Forgery (SSRF)
 * [ ] 416: Use After Free

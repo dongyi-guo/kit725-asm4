@@ -383,8 +383,10 @@ namespace TheVunerableApp.DataSource
                         string hashedPassword = Convert.ToBase64String(new Rfc2898DeriveBytes(request.Password, salt, iterations).GetBytes(32));
                         
                         cmd.Parameters.AddWithValue("@id", request.AdminId);
-                        //Code with Vulnerabilities.
-                        //cmd.Parameters.AddWithValue("@password", request.Password);
+
+                        // Original Code with Vulnerabilities.
+                        // cmd.Parameters.AddWithValue("@password", request.Password);
+
                         // Weakness Patched
                         cmd.Parameters.AddWithValue("@password", hashedPassword);
                         cmd.Parameters.AddWithValue("@role", "Admin");
@@ -435,8 +437,10 @@ namespace TheVunerableApp.DataSource
                         string hashedPassword = Convert.ToBase64String(new Rfc2898DeriveBytes(request.Password, salt, iterations).GetBytes(32));
                         
                         cmd.Parameters.AddWithValue("@id", request.CustomerId);
-                        //Code with Vulnerabilities.
-                        //cmd.Parameters.AddWithValue("@password", request.Password);
+                        
+                        // Code with Vulnerabilities.
+                        // cmd.Parameters.AddWithValue("@password", request.Password);
+
                         // Weakness Patched
                         cmd.Parameters.AddWithValue("@password", hashedPassword);
                         
