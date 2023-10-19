@@ -230,9 +230,19 @@ namespace TheVunerableApp.Test
             Transaction sike = null;
             Transaction negative = new Transaction("6763996216", -500.00, "8829905701");
             Transaction noSuchAccount = new Transaction("66666666", 100, "99999999");
-            sql.StoreTransaction(sike);
-            sql.StoreTransaction(negative);
-            sql.StoreTransaction(noSuchAccount);
+            bool sikeCheck = sql.StoreTransaction(sike);
+            bool negativeCheck = sql.StoreTransaction(negative);
+            bool noAccountCheck = sql.StoreTransaction(noSuchAccount);
+            string invalid_amount = TransactionController.StoreTransactions(negative.SourceAccount, negative.Amount, negative.TargetAccount);
+            string invalid_account = TransactionController.StoreTransactions(noSuchAccount.SourceAccount, noSuchAccount.Amount, noSuchAccount.TargetAccount);
+
+            Console.WriteLine("Three boolean below should be all false:");
+            Console.WriteLine(sikeCheck);
+            Console.WriteLine(negativeCheck);
+            Console.WriteLine(noAccountCheck);
+            Console.WriteLine(invalid_amount);
+            Console.WriteLine(invalid_account);
+            Console.WriteLine("If error messages above appear and no exception thrown, CWE-20 Patched");
         }
     }
 }

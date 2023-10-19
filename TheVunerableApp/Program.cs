@@ -36,6 +36,8 @@ namespace TheVunerableApp
             Test.Test.CWE306_ThuanPinGoh();
             Test.Test.CWE798_ThuanPinGoh();
             Test.Test.CWE125_ThuanPinGoh();
+            // Also validating Patch for CWE-125
+            Program.SearchCustomerByAccountNumeber();
             Test.Test.CWE522_DongyiGuo();
             Test.Test.CWE20_DongyiGuo();
 
@@ -47,7 +49,8 @@ namespace TheVunerableApp
 
             // Program.UpdateCustomerDetails();
             // Program.DisplayUserDetails();
-            Program.SearchCustomerByAccountNumeber();
+
+            
             // Program.getAllUserAccounts();
             // Program.AddCustomerToAccount();
             // Program.getAccountBalance();
