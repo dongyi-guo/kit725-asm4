@@ -227,7 +227,37 @@ namespace TheVunerableApp.DataSource
 
             return rows;
         }
-        
+
+        /*
+         * This method is created to solve the CWE-306, CWE-307 in Customer.cs
+         * To validate if there is any existing account having the same account number
+         */
+        public bool UserIDExists(string userID)
+        {
+            string accountQuery = "SELECT COUNT(*) FROM User WHERE UserId = @UserID";
+            using (SQLiteConnection conn = new SQLiteConnection(ConnectionString))
+            {
+                conn.Open();
+                using (SQLiteCommand command = new SQLiteCommand(accountQuery, conn))
+                {
+                    command.Parameters.AddWithValue("@UserID", userID);
+                    int count = Convert.ToInt32(command.ExecuteScalar());
+
+                    // If count is 0, the userID is unique; otherwise, it's not
+                    if (count == 0)
+                    {
+                        return true; //no user has this ID yet
+                    }
+                    else
+                    {
+                        return false; //existing user
+                    }
+
+                }
+
+            }
+        }
+
         public bool CreateAccountInDB(Account accountObj, int flag)
         {
             string accountQuery = "INSERT INTO Account (AccountNumber, AccountType, CustomerId) VALUES (@accountNumber, @accountType, @customerId)";
@@ -306,7 +336,7 @@ namespace TheVunerableApp.DataSource
         }
 
         /*
-         * This method is created to solve the CWE-306, CWE-307
+         * This method is created to solve the CWE-306, CWE-307 in Account.cs
          * To validate if there is any existing account having the same account number
          */
         public bool AccountNumberExists(string accountNumber)
@@ -318,16 +348,16 @@ namespace TheVunerableApp.DataSource
                 using (SQLiteCommand command = new SQLiteCommand(accountQuery, conn))
                 {
                     command.Parameters.AddWithValue("@AccountNumber", accountNumber);
-                    int count = 0;
+                    int count = Convert.ToInt32(command.ExecuteScalar());
 
                     // If count is 0, the account number is unique; otherwise, it's not
                     if (count == 0)
                     {
-                        return true;
+                        return true;//no exisitng account number
                     }
                     else
                     {
-                        return false;
+                        return false;//existing account number
                     }
 
                 }

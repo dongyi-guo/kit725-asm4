@@ -166,10 +166,43 @@ namespace TheVunerableApp.Test
         }
 
         /*
-         * The following function exploits and tests CWE-306 for:
+         * The following function exploits and tests CWE-306 and CWE-330 for:
          * 
          * Account.cs - GenerateAccountNumber() function
          */
+        public static void CWE306_CWE330_ThuanPinGoh()
+        {
+            /*
+             * To exploit the CWE in this function, this function will have to 
+             * flood the database to create an exactly same account number 
+             * 
+             * However, this can be a problem if the RNG generate a similar account number
+             * and causing the data corruption
+             */
+            Console.WriteLine("CWE-306 and CWE-330 from account.cs cannot be tested by using normal method as it involve data corruption");
+            //AccountController.CreateSavingsAccount("12345678", 1.0, 1.0);
+            //AccountController.CloseAccount("12345678", "05183384");
+
+        }
+
+        /*
+         * The following function exploits and tests CWE-306 and CWE-330 for:
+         * 
+         * Customer.cs - GenerateUserId() function
+         */
+        public static void CWE306_CWE330_2_ThuanPinGoh()
+        {
+            /*
+             * To exploit the CWE in this function, this function will have to 
+             * flood the database to create an exactly same account number 
+             * 
+             * However, this can be a problem if the RNG generate a similar account number
+             * and causing the data corruption
+             */
+            Console.WriteLine("CWE-306 and CWE-330 from customer.cs cannot be tested by using normal method as it involve data corruption");
+
+        }
+
         public static void CWE306_ThuanPinGoh()
         {
             /*
@@ -179,9 +212,8 @@ namespace TheVunerableApp.Test
              * However, this can be a problem if the RNG generate a similar account number
              * and causing the data corruption
              */
-            Console.WriteLine("CWE-306 cannot be tested by using normal method as it involve data corruption");
-            //AccountController.CreateSavingsAccount("12345678", 1.0, 1.0);
-            //AccountController.CloseAccount("12345678", "05183384");
+            String message = UserController.RemoveCustomer("12345678");
+            Console.WriteLine("CWE306_removeCustomer(): " + message);
 
         }
 

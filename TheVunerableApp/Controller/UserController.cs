@@ -72,10 +72,31 @@ namespace TheVunerableApp.Controller
 
             return balances;
         }
-        public static void UpdateUser(string customerId, string name, string sName, string email, string govId)
+        /*
+         * One vulnerability identified in this method
+         * 
+         * 1.
+         * Identified as CWE-306
+         * 19/10/2023 - Identified by Thuan Pin Goh
+         * 19/10/2023 - Exploited by Thuan Pin Goh
+         * 19/10/2023 - Patched by Thuan Pin Goh
+         */
+        public static string UpdateUser(string customerId, string name, string sName, string email, string govId)
         {
+            /*
+             * SQLiteDB sql = new SQLiteDB();
+             * sql.UpdateCustomerDetailsInDB(customerId, name, sName, email, govId);
+             */
             SQLiteDB sql = new SQLiteDB();
-            sql.UpdateCustomerDetailsInDB(customerId, name, sName, email, govId);
+            if (!sql.UserIDExists(customerId))
+            {
+                sql.UpdateCustomerDetailsInDB(customerId, name, sName, email, govId);
+                return "User details updated successfully.";
+            }
+            else
+            {
+                return "User not found. No updates were made.";
+            }
         }
 
 
@@ -110,12 +131,32 @@ namespace TheVunerableApp.Controller
             // This exploit can also be fixed in lower level class (SQLiteDB.cs) or where it is being called.
         }
 
+        /*
+         * One vulnerability identified in this method
+         * 
+         * 1.
+         * Identified as CWE-306
+         * 19/10/2023 - Identified by Thuan Pin Goh
+         * 19/10/2023 - Exploited by Thuan Pin Goh
+         * 19/10/2023 - Patched by Thuan Pin Goh
+         */
         public static string RemoveCustomer(string customerId)
         {
+            /*
+             * SQLiteDB sql = new SQLiteDB();
+             * Customer customer = sql.RemoveUser(customerId);
+             */
+
             SQLiteDB sql = new SQLiteDB();
-            Customer customer = sql.RemoveUser(customerId);
-            // Return the customer id of the user removed from the database
-            return customer.CustomerId; 
+            if (!sql.UserIDExists(customerId))
+            {
+                Customer customer = sql.RemoveUser(customerId);
+                return customer.CustomerId;// Return the customer id of the user removed from the database
+            }
+            else
+            {
+                return "This ID cannot be found, failed to remove customer";
+            }
         }
 
         /*
