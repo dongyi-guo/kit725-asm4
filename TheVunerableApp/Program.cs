@@ -33,7 +33,10 @@ namespace TheVunerableApp
             Test.Test.CWE476_DongyiGuo();
             Test.Test.CWE427_RonghuaYang();
             Test.Test.CWE798_DongyiGuo();
+            Test.Test.CWE306_CWE330_ThuanPinGoh();//including CWE-330
+            Test.Test.CWE306_CWE330_2_ThuanPinGoh(); //including CWE-330
             Test.Test.CWE306_ThuanPinGoh();
+            Program.UpdateCustomerDetails();//for CWE-306
             Test.Test.CWE798_ThuanPinGoh();
             Test.Test.CWE125_ThuanPinGoh();
             // Also validating Patch for CWE-125
@@ -46,10 +49,8 @@ namespace TheVunerableApp
             /* Following are test methods that you can use individually to run some test drivers for the code.
              * However, you should be writing your test code in Test.cs */
 
-            // Program.UpdateCustomerDetails();
-            // Program.DisplayUserDetails();
-
             
+            // Program.DisplayUserDetails();
             // Program.getAllUserAccounts();
             // Program.AddCustomerToAccount();
             // Program.getAccountBalance();
@@ -72,7 +73,8 @@ namespace TheVunerableApp
         }
         private static void UpdateCustomerDetails() 
         {
-            UserController.UpdateUser("6763996216", "Jean", "Grey", "j.grey@xmen.com", "321-456-9876");
+            String message = UserController.UpdateUser("6763996216", "Jean", "Grey", "j.grey@xmen.com", "321-456-9876");
+            Console.WriteLine(message);
         }
 
         private static void DisplayUserDetails() 

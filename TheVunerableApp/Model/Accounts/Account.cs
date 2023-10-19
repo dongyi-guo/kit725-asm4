@@ -37,14 +37,21 @@ namespace TheVunerableApp.Model
         }
 
         /*
-         * One vulnerability identified in this method
+         * Two vulnerability identified in this method
          * 
          * 1.
-         * Identified as CWE-306, CWE-307, CWE-330
+         * Identified as CWE-306
+         * 19/10/2023 - Identified by Thuan Pin Goh
+         * 19/10/2023 - Exploited by Thuan Pin Goh
+         * 19/10/2023 - Patched by Thuan Pin Goh
+         * 
+         * 2.
+         * Identified as CWE-330
          * 19/10/2023 - Identified by Thuan Pin Goh
          * 19/10/2023 - Exploited by Thuan Pin Goh
          * 19/10/2023 - Patched by Thuan Pin Goh
          */
+
         private string GenerateAccountNumber()
         {
             //this code is to replace the original random, to ensure the account number has better randomness
