@@ -69,7 +69,7 @@ namespace TheVunerableApp.DataSource
         // private string Filepath = @"DB\Bank.sqlite";
 
         /*
-         * One vulnerability identified in this variable
+         * One vulnerability identified in this method
          * 
          * 1.
          * Identified as CWE-362
@@ -102,7 +102,7 @@ namespace TheVunerableApp.DataSource
         }
 
         /*
-        * One vulnerability identified in this variable
+        * One vulnerability identified in this method
         * 
         * 1.
         * Identified as CWE-362
@@ -204,7 +204,7 @@ namespace TheVunerableApp.DataSource
         }
 
         /*
-        * One vulnerability identified in this variable
+        * One vulnerability identified in this method
         * 
         * 1.
         * Identified as CWE-362
@@ -248,7 +248,7 @@ namespace TheVunerableApp.DataSource
         }
 
         /*
-        * One vulnerability identified in this variable
+        * One vulnerability identified in this method
         * 
         * 1.
         * Identified as CWE-362
@@ -291,7 +291,7 @@ namespace TheVunerableApp.DataSource
         }
 
         /*
-        * One vulnerability identified in this variable
+        * One vulnerability identified in this method
         * 
         * 1.
         * Identified as CWE-362
@@ -343,7 +343,7 @@ namespace TheVunerableApp.DataSource
         }
 
         /*
-        * One vulnerability identified in this variable
+        * One vulnerability identified in this method
         * 
         * 1.
         * Identified as CWE-362
@@ -420,7 +420,7 @@ namespace TheVunerableApp.DataSource
         }
 
         /*
-        * One vulnerability identified in this variable
+        * One vulnerability identified in this method
         * 
         * 1.
         * Identified as CWE-362
@@ -839,7 +839,7 @@ namespace TheVunerableApp.DataSource
         }
 
         /*
-        * One vulnerability identified in this variable
+        * One vulnerability identified in this method
         * 
         * 1.
         * Identified as CWE-362
@@ -885,7 +885,7 @@ namespace TheVunerableApp.DataSource
         }
 
         /*
-        * One vulnerability identified in this variable
+        * One vulnerability identified in this method
         * 
         * 1.
         * Identified as CWE-362
@@ -932,7 +932,7 @@ namespace TheVunerableApp.DataSource
         }
 
         /*
-        * One vulnerability identified in this variable
+        * One vulnerability identified in this method
         * 
         * 1.
         * Identified as CWE-362
