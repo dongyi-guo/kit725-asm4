@@ -89,7 +89,9 @@ namespace TheVunerableApp.DataSource
             }
             path = Path.Combine(FilePath, path);
 
-            // CWE-502: The json file is provided freely from the user, the sanity of it should be checked, JsonSerializer.Deserialize<>() provides Exceptions to be thrown while there are something wrong. While calling this function exception handler should always be kept in mind.
+            // CWE-502: The json file is provided freely from the user, the sanity of it should be checked,
+            // JsonSerializer.Deserialize<>() provides Exceptions to be thrown while there are something wrong.
+            // While calling this function exception handler should always be kept in mind.
 
             return JsonSerializer.Deserialize<Transaction>(path);
         }
