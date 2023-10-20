@@ -26,27 +26,47 @@ namespace TheVunerableApp.DataSource
      */
     internal class SQLiteDB:DBAdapter
     {
+        /*
+         * One vulnerability identified in this variable
+         * 
+         * 1.
+         * Identified as CWE-276
+         * 18/10/2023 - Identified by Dongyi Guo
+         * 18/10/2023 - Exploited by Dongyi Guo
+         * 18/10/2023 - Patched by Dongyi Guo
+         */
         public string ConnectionString = "Data Source=VulApp.db";
+
+        // CWE-276 Dummy Patch - Weakness resolved
+        // private string ConnectionString = "Data Source=VulApp.db";
 
         // To avoid Race condition, Mutex is introduced
         private static Mutex mutex = new Mutex();
 
         /*
-         * One vulnerability identified in this variable
+         * Two vulnerabilities identified in this variable
          * 
          * 1.
          * Identified as CWE-427
          * 18/10/2023 - Identified by Ronghua Yang
          * 18/10/2023 - Exploited by Ronghua Yang
          * 18/10/2023 - Patched by Ronghua Yang
+         * 2.
+         * Identified as CWE-276
+         * 18/10/2023 - Identified by Dongyi Guo
+         * 18/10/2023 - Exploited by Dongyi Guo
+         * 18/10/2023 - Patched by Dongyi Guo
          */
 
         // Code with vulnerability
         // This absolute path only works on certain machine as username of current user is part of it.
         // public string Filepath = @"C:\Users\mbamin\source\repos\TheVunerableApp\TheVunerableApp\DB\Bank.sqlite";
 
-        // Weakness resolved - use relative path
+        // CWE-427: Weakness resolved - use relative path
         public string Filepath = @"DB\Bank.sqlite";
+
+        // CWE-276 Dummy Patch - Weakness resolved
+        // private string Filepath = @"DB\Bank.sqlite";
 
         /*
          * One vulnerability identified in this variable

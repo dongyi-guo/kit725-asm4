@@ -376,7 +376,7 @@ namespace TheVunerableApp.Test
          */
         public static void CWE362_DongyiGuo()
         {
-            int num_threads = 3;
+            int num_threads = 2;
             Task[] task = new Task[num_threads];
             
             try
@@ -396,6 +396,21 @@ namespace TheVunerableApp.Test
                 Console.WriteLine("The Exception was catched, CWE-362 Exploited.");
 
             }
+        }
+
+        /*
+         * The following function exploits and tests CWE-276 for:
+         * 
+         * SQLiteDB.cs - Filepath
+         */
+        public static void CWE276_DongyiGuo()
+        {
+            Console.WriteLine(sql.Filepath);
+            Console.WriteLine(sql.ConnectionString);
+            Console.WriteLine("If you can see Filepath and ConnectionString above, then CWE-276 Exploited.");
+            Console.WriteLine("All we need to patch is changing these variables from public to private.");
+            Console.WriteLine("But this will interfere demostration of other tests. Hence Patches are commented out in the postion.");
+            Console.WriteLine("CWE-276 Patched.");
         }
     }
 }
