@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
+using System.Threading.Tasks;
 using System.Transactions;
 using TheVunerableApp.Controller;
 using TheVunerableApp.DataSource;
@@ -362,6 +363,37 @@ namespace TheVunerableApp.Test
             catch
             {
                 Console.WriteLine("The Exception was catched, which is intentionally the patch for CWE-502, CWE-502 patched");
+
+            }
+        }
+
+        /*
+         * The following function exploits and tests CWE-362 for:
+         * 
+         * All Functions in SQLiteDB.cs that talks to Database.
+         * 
+         * Here, we will use AccountNumberExists(string accountNumber) as example
+         */
+        public static void CWE362_DongyiGuo()
+        {
+            int num_threads = 3;
+            Task[] task = new Task[num_threads];
+            
+            try
+            {
+                for (int i = 0; i < num_threads; i++)
+                {
+                    task[i] = Task.Run(
+                        () => sql.AccountNumberExists("89048295"));
+                }
+
+                Task.WhenAll(task).Wait();
+
+                Console.WriteLine("All threads have finished fine, CWE-362 Patched.");
+            }
+            catch
+            {
+                Console.WriteLine("The Exception was catched, CWE-362 Exploited.");
 
             }
         }

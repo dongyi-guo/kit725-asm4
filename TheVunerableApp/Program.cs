@@ -46,6 +46,7 @@ namespace TheVunerableApp
             Test.Test.CWE22_DongyiGuo();
             Test.Test.CWE73_DongyiGuo();
             Test.Test.CWE502_DongyiGuo();
+            Test.Test.CWE362_DongyiGuo();
             Console.WriteLine("Finish");
 
             // Program.DbSetUpForTesting(); // For setup only Do not use it unless the db is in inconsistence state.

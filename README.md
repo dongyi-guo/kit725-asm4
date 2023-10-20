@@ -68,7 +68,7 @@ Each exploit must be coded in a separate method/function. The name of the method
 * [ ] 94: Improper Control of Generation of Code ("Code Injection")
 * [ ] 119: Improper Restriction of Operations within the Bounds of a Memory Buffer
 * [ ] 169: Improper Privilege Management
-* [ ] 276: Incorrect Default Permissions
+* [x] 276: Incorrect Default Permissions
 * [ ] 287: Improper Authentication
 * [ ] 863: Incorrect Authorization
 * [x] 798: Hard-coded Credentials
