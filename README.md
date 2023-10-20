@@ -64,7 +64,7 @@ Each exploit must be coded in a separate method/function. The name of the method
 * [ ] 77: Improper Neutralization of Special Elements used in commands ("Command injection")
 * [ ] 78: Improper Neutralization of Special Elements used in OS commands ("OS command injection")
 * [ ] 79: Improper Neutralization of Input During Web Page Generation ("XSS")
-* [x] 89: Improper Neutralization of Special Elements used in an SQL Command ("SQL Injection")
+* [ ] 89: Improper Neutralization of Special Elements used in an SQL Command ("SQL Injection")
 * [ ] 94: Improper Control of Generation of Code ("Code Injection")
 * [ ] 119: Improper Restriction of Operations within the Bounds of a Memory Buffer
 * [ ] 169: Improper Privilege Management
